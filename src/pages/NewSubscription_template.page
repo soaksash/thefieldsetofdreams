@@ -1,0 +1,27 @@
+<apex:page showHeader="true" sidebar="true" standardController="Subscription__c" extensions="NewSubscription_Live_Extension">
+	<link rel="stylesheet" href="{!URLFOR($Resource.jquery,'jquery-ui.css')}" />
+    <script src="{!URLFOR($Resource.jquery,'jquery-1.9.1.js')}"></script> 
+    <script src="{!URLFOR($Resource.jquery,'jquery-ui.js')}"></script>
+
+
+	<apex:form >
+	<apex:pageBlock >
+		<apex:pageBlockButtons >
+			<apex:commandButton value="Create New Subscription" action="{!save}" />
+			<apex:commandButton value="Cancel" action="{!cancel}" />
+		</apex:pageBlockButtons>
+		<apex:pageBlockSection title="Subscription Information" columns="1" >
+			<apex:repeat value="{!subscriptionFieldSet}" var="i">
+				<apex:pageBlockSectionItem >
+					{!i.label}
+					<apex:outputPanel >
+						<apex:inputField value="{!mySubscription[i.fieldPath]}" rendered="{!i.fieldPath != 'Country__c' && i.type!='date'}" required="{!i.required}" />
+						<c:JQueryAutocomplete object="{!mySubscription}" fieldname="{!i.fieldPath}" rendered="{!i.fieldPath == 'Country__c'}" required="{!i.required}" />
+						<c:JQueryDatePicker object="{!mySubscription}" fieldname="{!i.fieldPath}" rendered="{!i.type=='date'}" required="{!i.required}" />
+					</apex:outputPanel>
+				</apex:pageBlockSectionItem>
+			</apex:repeat>
+		</apex:pageBlockSection>
+	</apex:pageBlock>
+	</apex:form>
+</apex:page>

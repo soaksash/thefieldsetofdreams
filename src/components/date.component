@@ -1,0 +1,14 @@
+<apex:component controller="jqueryAutocompleteController">
+	<apex:attribute name="object" assignTo="{!objectRef}" type="SObject" required="true" description="object name attribute" />
+	<apex:attribute name="field" assignTo="{!fieldnameRef}" type="String" required="true" description="field name attribute" />
+
+	<apex:attribute name="required" assignTo="{!isRequired}" type="Boolean" required="false" description="indicates whether component is required" />
+
+	<apex:inputText id="datepicker_component" value="{!objectRef[fieldnameRef]}" required="{!isRequired}" />
+	<script type="text/javascript">
+
+		$('[id$=datepicker_component]').datepicker();
+
+	</script>
+    
+</apex:component>

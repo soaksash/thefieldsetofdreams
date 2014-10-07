@@ -1,0 +1,19 @@
+<apex:component controller="jqueryAutocompleteController">
+	<apex:attribute name="object" assignTo="{!objectRef}" type="SObject" required="true" description="object name attribute" />
+	<apex:attribute name="field" assignTo="{!fieldnameRef}" type="String" required="true" description="field name attribute" />
+	<apex:attribute name="required" assignTo="{!isRequired}" type="Boolean" required="false" description="indicates whether component is required" />
+
+	
+	<apex:inputField id="autocomplete_input" value="{!objectRef[fieldnameRef]}" required="{!isRequired}" />
+	<script type="text/javascript">
+
+		$('[id$=autocomplete_input]').autocomplete({
+                    source: location.protocol + "//" + location.host + "/apex/CountriesJSON", 
+                    minLength: 2, 
+                    select: function (event, ui)
+                    {
+                    }
+            });
+
+	</script>
+</apex:component>
